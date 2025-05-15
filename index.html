@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Icons">
     <style>
-        body, div, h2, p, img { margin:0; padding:0; box-sizing: border-box; }
+        body, div, h2, p, img, ul, li { margin:0; padding:0; box-sizing: border-box; }
         :root {
             --pink:#ff74a4;
             --violet:#9f6ea3;
@@ -85,23 +85,23 @@
         }
 
         
-        .wrap { display: flex;   justify-content: space-between; align-items: center; }
-        .container {
-            width:34px; height:22px;
+        .wrap { display: flex; justify-content: space-between; width:100%; padding:10px 10px 10px;}
+        .randomImg { margin-top: 5px;
+            width:34px; height:22px; 
             display: flex; justify-content: center; align-items: flex-end; gap:3px; 
         }
-        .container.off{ height:1px}
-        .container > span { 
+        .randomImg.off{ height:1px}
+        .randomImg > span { 
             width:2px; height:100%; background:var(--pink);
         }
-
+        .volume { padding-bottom:5px;}
     
         .play_list { 
-            position: absolute; width:300px; min-height:350px; background: #090909; top:120px; left: 30px; color:var(--color-light);
+            position: absolute; width:300px; min-height:380px; background: #090909; top:120px; left: 30px; color:var(--color-light);
             padding:20px; box-sizing: border-box; display: none;
         }
         .play_list.active { display: block;}
-        .play_list li { width:100%;
+        .play_list li { width:100%; 
             border-bottom: 1px solid var(--color-light); font-size: 16px; letter-spacing: -1px;
             padding:7px 0; cursor: pointer;
             display: flex; justify-content: space-between; align-items: flex-end;
@@ -114,28 +114,23 @@
             appearance: none;
             cursor: pointer;
             outline: none;
-            width: 50%;
-            height: 0.2rem; /* thumb의 height와 일치 */
-            margin: 0; /* reset margin */
-            padding: 0; /* reset padding */
+            width: 120px;
+            height: 4px; 
+            margin: 0; 
+            padding: 0;
             background-color: var(--pink);
         }
         [type="range"]::-webkit-slider-thumb { /* Webkit 기반 브라우저 */
             appearance: none;
-            width: 0.5rem; /* height와 일치 */
-            height: 0.5rem;
+            width: 10px;
+            height: 10px;
             border: none;
             border-radius: 50%;
             background-color: var(--color-red);
             transition: all 0.15s ease-in-out;
-            margin-top: calc((1.5rem - 1.5rem) * 0.5); /* calc((track의 height - thumb의 height) * 0.5) */
         }
         
-        #volume_btn1 { color:var(--color-red)}
-        #volume_btn2 { color:var(--color-red)}
-        #volume_btn3 { color:var(--color-red)}
-
-
+        
    </style>
 </head>
 <body>
@@ -147,16 +142,13 @@
             <img src="./album/album1.jpg" alt="">
         </div>
         <div class="wrap">            
-            <div class="container">
+            <div class="randomImg">
                 <span></span><span></span><span></span><span></span><span></span>
             </div>
             <div class="volume">
                 <span class="volumeBar">
                     <input type="range" id="volume_control" min="0" max="10" value="5" step="1" >
-                </span>
-                <!-- <span id="volume_btn1" class="material-icons">volume_up</span>
-                <span id="volume_btn2" class="material-icons">volume_down</span>
-                <span id="volume_btn3" class="material-icons">volume_off</span> -->
+                </span>                
             </div> 
         </div>
         <div class="info">
@@ -188,6 +180,7 @@
     </div>
     <script src="music_list.js"></script>
     <script>
+        
         const musicApp = document.querySelector('.player_body');
         const musicAudio = musicApp.querySelector('#mainAudio');
         const playBtn = musicApp.querySelector('#playBtn');
@@ -210,9 +203,9 @@
             artistName.innerHTML = musicList[num].artist;
             totalTime.innerHTML = musicList[num].total;
         }
-        loadMusic(list_index) ;
-
-        const bars = document.querySelectorAll('.container>span');
+        loadMusic(list_index);
+        
+        const bars = document.querySelectorAll('.randomImg>span');
         let soundControl;
         function randomHeight(){
             cancelAnimationFrame(soundControl);
@@ -364,28 +357,12 @@
         listLoad();
 
 
-
-        /* element(volume_up).addEventListener('click',()=>{
-            music.volume+=0.1  조건 1이상 증가 제어
-            
-        })
-        element(volume_down).addEventListener('click',()=>{
-            music.volume-=0.1  조건 0이하 증가 제어
-            
-        }) */
-
-        /* input[range].addEventListener('change',()=>{
-            ipnut[range].volume = this.value/100;
-        })  */
-
-
-
-        const audio = document.getElementById('#musicAudio');
+        const audio = document.getElementById('musicAudio');
         const audioVolume = document.getElementById('volume_control');
 
         audioVolume.addEventListener("change", function(e) {
             audio.volume = this.value/10;
-        })        
+        }) 
         
     </script>
 </body>
