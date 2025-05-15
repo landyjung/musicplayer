@@ -114,7 +114,7 @@
             appearance: none;
             cursor: pointer;
             outline: none;
-            width: 120px;
+            width: 220px;
             height: 4px; 
             margin: 0; 
             padding: 0;
@@ -147,7 +147,7 @@
             </div>
             <div class="volume">
                 <span class="volumeBar">
-                    <input type="range" id="volume_control" min="0" max="10" value="5" step="1" >
+                    <input type="range" id="volume_control" min="0" max="1" value="0.5" step="0.1" >
                 </span>                
             </div> 
         </div>
@@ -201,13 +201,16 @@
             albumImg.src = `./album/${ musicList[num].img}.jpg`;
             musicName.innerHTML = musicList[num].name;
             artistName.innerHTML = musicList[num].artist;
-            totalTime.innerHTML = musicList[num].total;
+            totalTime.innerHTML = musicList[num].total;            
         }
         loadMusic(list_index);
         
         const bars = document.querySelectorAll('.randomImg>span');
+        bars.forEach(bar => bar.style.height = '0%');
+        
         let soundControl;
-        function randomHeight(){
+        function randomHeight(){            
+            
             cancelAnimationFrame(soundControl);
             bars.forEach((bar)=>{
                 bar.animate(
@@ -223,7 +226,7 @@
             bars.forEach((bar)=>{
                 bar.animate(
                     { height:'0%'},
-                    { duration:250, easing:'ease-out', fill:'both'}
+                    { duration:250, easing:'ease-out', fill:'forwards'}
                 )
                 //bar.style.height = `${ Math.floor(Math.random()*95)+5}%`;
             });
@@ -357,11 +360,11 @@
         listLoad();
 
 
-        const audio = document.getElementById('musicAudio');
+        const audio = document.getElementById('mainAudio');
         const audioVolume = document.getElementById('volume_control');
 
         audioVolume.addEventListener("change", function(e) {
-            audio.volume = this.value/10;
+            audio.volume = this.value/1;
         }) 
         
     </script>
