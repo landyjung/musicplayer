@@ -207,7 +207,6 @@
         
         const bars = document.querySelectorAll('.randomImg>span');
         bars.forEach(bar => bar.style.height = '0%');
-        
         let soundControl;
         function randomHeight(){            
             
@@ -359,12 +358,9 @@
         }
         listLoad();
 
-
-        const audio = document.getElementById('mainAudio');
         const audioVolume = document.getElementById('volume_control');
-
-        audioVolume.addEventListener("change", function(e) {
-            audio.volume = this.value/1;
+        audioVolume.addEventListener('change', function() {
+            mainAudio.volume = this.value/1;
         }) 
         
     </script>
