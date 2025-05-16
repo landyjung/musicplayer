@@ -49,7 +49,7 @@
         .album { height:260px; border-radius: 12px; overflow: hidden; }
         .album > img { width:100%; height:100%; object-fit: cover; object-position: center bottom;}
 
-        .info { text-align: center; font-size:calc(var(--text-size) * 0.6); margin:calc(var(--text-size) * 0.4)}
+        .info { text-align: center; font-size:calc(var(--text-size) * 0.6); margin:calc(var(--text-size) * 0.4); }
         .info > .artist { font-size: calc(var(--text-size) * 0.4);}
 
         .progress { 
@@ -68,7 +68,7 @@
         .progress> .timebox > span { 
             color:#151515; text-shadow: 1px 1px 0px var(--color-light); font-weight: 600;
         }
-        .controls {display: flex; margin-top: 40px; justify-content: space-between; align-items: center;}
+        .controls {display: flex; margin-top: 40px; justify-content: space-between; align-items: center; }
         .controls > span
         {
             font-weight: 500; font-size: var(--text-size);
@@ -85,8 +85,8 @@
         }
 
         
-        .wrap { display: flex; justify-content: space-between; width:100%; padding:10px 10px 10px;}
-        .randomImg { margin-top: 5px;
+        .wrap { display: flex; justify-content: space-between; width:100%; padding:10px 10px 10px; }
+        .randomImg { margin-top: 5px; 
             width:34px; height:22px; 
             display: flex; justify-content: center; align-items: flex-end; gap:3px; 
         }
@@ -110,7 +110,7 @@
         .play_list li span { font-size:10px}
         .play_list li.active{ color:#00ffea}
 
-        [type="range"] {
+        input[type="range"] {
             appearance: none;
             cursor: pointer;
             outline: none;
@@ -119,18 +119,57 @@
             margin: 0; 
             padding: 0;
             background-color: var(--pink);
+            margin-top: calc((0.5rem - 1.5rem) * 0.5);
         }
-        [type="range"]::-webkit-slider-thumb { /* Webkit 기반 브라우저 */
+        /* thumb */
+        input[type="range"]::-webkit-slider-thumb { /* Webkit 기반 브라우저 */
             appearance: none;
-            width: 10px;
-            height: 10px;
+            width: 0.5rem;
+            height: 0.5rem;
             border: none;
             border-radius: 50%;
             background-color: var(--color-red);
             transition: all 0.15s ease-in-out;
         }
         
-        
+        input[type="range"]::-moz-range-thumb { /* 파이어폭스 */
+            appearance: none;
+            width: 0.5rem;
+            height: 0.5rem;
+            border: none;
+            border-radius: 50%;
+            background-color:var(--color-red);
+            transition: all 0.15s ease-in-out;
+        }
+        input[type="range"]:focus::-webkit-slider-thumb { /* Webkit 기반 브라우저 */
+            box-shadow: 0 0 0 1px #fff, 0 0 0 .25rem rgba(107, 0, 117, 0.4);
+        }
+        input[type="range"]:focus::-moz-range-thumb { /* 파이어폭스 */
+            box-shadow: 0 0 0 1px #fff, 0 0 0 .25rem rgba(107, 0, 117, 0.4);
+        }
+        input[type="range"]::-webkit-slider-thumb:active { /* Webkit 기반 브라우저 */
+            background-color:var(--pink);
+        }
+        input[type="range"]::-moz-range-thumb:active { /* 파이어폭스 */
+            background-color:var(--pink);
+        }
+
+        /* track */
+        input[type="range"]::-webkit-slider-runnable-track { /* Webkit 기반 브라우저 */
+            cursor: pointer;
+            width: 100%;
+            height: 0.5rem;
+            background-color:var(--pink);
+            border-radius: 0.25rem;
+        }
+        input[type="range"]::-moz-range-track { /* 파이어폭스 */
+            cursor: pointer;
+            width: 100%;
+            height: 0.5rem;
+            background-color:var(--pink);
+            border-radius: 0.25rem;
+        }
+                
    </style>
 </head>
 <body>
@@ -195,8 +234,7 @@
         const nextBtn = musicApp.querySelector('#nextBtn');
         let list_index =0;
 
-        const loadMusic =(num)=>{       //music list 배열순번 정의 인자(매개변수) : num
-            //파일경로, 이미지경로, 음악이름, 아티스트, 전체시간 출력
+        const loadMusic =(num)=>{ 
             musicAudio.src = `./mp3/${ musicList[num].audio }.mp3`;
             albumImg.src = `./album/${ musicList[num].img}.jpg`;
             musicName.innerHTML = musicList[num].name;
