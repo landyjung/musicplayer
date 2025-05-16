@@ -1,4 +1,8 @@
 # musicplayer
+오픈 소스 음원을 배열로 불러 재생할 수 있는 javascript 기반의 플레이어
+html, css, javascript 개발언어 외 구글 poppins 폰트와 material 아이콘을 이용한 디스플레이로 구성
+
+주유기능
 1. 총 6곡의 음원이 album 폴더에 수록
 2. 재생/멈춤/전/후/반복의 기본기능 제공
 3. 플레이리스트 창에서 수록된 곡 제목/아티스트 확인 가능
